@@ -11,7 +11,7 @@ export default class RestaurantsDAO {
       restaurants = await conn.db(process.env.RESTREVIEWS_NS).collection("restaurants")
     } catch (e) {
       console.error(
-        `Unable to establish a collection handle in restaurantsDAO: ${e}`,
+        `restaurantsDAO: ${e}`,
       )
     }
   }
@@ -95,7 +95,7 @@ export default class RestaurantsDAO {
           ]
       return await restaurants.aggregate(pipeline).next()
     } catch (e) {
-      console.error(`Something went wrong in getRestaurantByID: ${e}`)
+      console.error(`getRestaurantByID: ${e}`)
       throw e
     }
   }
