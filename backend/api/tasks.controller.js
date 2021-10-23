@@ -1,6 +1,6 @@
-import RestaurantsDAO from "../dao/restaurantsDAO.js"
+import TasksDAO from "../dao/tasksDAO.js"
 
-export default class RestaurantsController {
+export default class TasksController {
   static async apiGetRestaurants(req, res, next) {
     const restaurantsPerPage = req.query.restaurantsPerPage ? parseInt(req.query.restaurantsPerPage, 10) : 20
     const page = req.query.page ? parseInt(req.query.page, 10) : 0
@@ -14,7 +14,7 @@ export default class RestaurantsController {
       filters.name = req.query.name
     }
 
-    const { restaurantsList, totalNumRestaurants } = await RestaurantsDAO.getRestaurants({
+    const { restaurantsList, totalNumRestaurants } = await TasksDAO.getRestaurants({
       filters,
       page,
       restaurantsPerPage,
@@ -32,7 +32,7 @@ export default class RestaurantsController {
   static async apiGetRestaurantById(req, res, next) {
     try {
       let id = req.params.id || {}
-      let restaurant = await RestaurantsDAO.getRestaurantByID(id)
+      let restaurant = await TasksDAO.getRestaurantByID(id)
       if (!restaurant) {
         res.status(404).json({ error: "Not found" })
         return

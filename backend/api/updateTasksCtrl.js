@@ -1,6 +1,6 @@
-import ReviewsDAO from "../dao/reviewsDAO.js"
+import UpdateTasksDAO from "../dao/updateTasksDAO.js"
 
-export default class ReviewsController {
+export default class UpdateTasksController {
   static async apiPostReview(req, res, next) {
     try {
       const restaurantId = req.body.restaurant_id
@@ -11,11 +11,11 @@ export default class ReviewsController {
       }
       const date = new Date()
 
-      const ReviewResponse = await ReviewsDAO.addReview(
+      const ReviewResponse = await UpdateTasksDAO.addReview(
         restaurantId,
         userInfo,
         review,
-        date,
+        date
       )
       res.json({ status: "success" })
     } catch (e) {
@@ -29,7 +29,7 @@ export default class ReviewsController {
       const text = req.body.text
       const date = new Date()
 
-      const reviewResponse = await ReviewsDAO.updateReview(
+      const reviewResponse = await UpdateTasksDAO.updateReview(
         reviewId,
         req.body.user_id,
         text,
@@ -58,7 +58,7 @@ export default class ReviewsController {
       const reviewId = req.query.id
       const userId = req.body.user_id
       console.log(reviewId)
-      const reviewResponse = await ReviewsDAO.deleteReview(
+      const reviewResponse = await UpdateTasksDAO.deleteReview(
         reviewId,
         userId,
       )

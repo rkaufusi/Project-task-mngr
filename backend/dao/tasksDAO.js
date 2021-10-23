@@ -2,13 +2,13 @@ import mongodb from "mongodb"
 const ObjectId = mongodb.ObjectID
 let restaurants
 
-export default class RestaurantsDAO {
+export default class TasksDAO {
   static async injectDB(conn) {
     if (restaurants) {
       return
     }
     try {
-      restaurants = await conn.db(process.env.RESTREVIEWS_NS).collection("restaurants")
+      restaurants = await conn.db(process.env.RESTREVIEWS_NS).collection("tasks")
     } catch (e) {
       console.error(
         `restaurantsDAO: ${e}`,
@@ -66,7 +66,7 @@ export default class RestaurantsDAO {
         },
               {
                   $lookup: {
-                      from: "reviews",
+                      from: "tasks",
                       let: {
                           id: "$_id",
                       },
@@ -74,7 +74,7 @@ export default class RestaurantsDAO {
                           {
                               $match: {
                                   $expr: {
-                                      $eq: ["$restaurant_id", "$$id"],
+                                      $eq: ["$tasks", "$$id"],
                                   },
                               },
                           },
@@ -84,7 +84,7 @@ export default class RestaurantsDAO {
                               },
                           },
                       ],
-                      as: "reviews",
+                      as: "tasks",
                   },
               },
               {

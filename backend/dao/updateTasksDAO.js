@@ -3,25 +3,28 @@ const ObjectId = mongodb.ObjectID
 
 let reviews
 
-export default class ReviewsDAO {
+export default class UpdateTasksDAO {
   static async injectDB(conn) {
     if (reviews) {
       return
     }
     try {
-      reviews = await conn.db(process.env.RESTREVIEWS_NS).collection("reviews")
+      reviews = await conn.db(process.env.RESTREVIEWS_NS).collection("tasks")
     } catch (e) {
       console.error(`Unable to establish collection handles in userDAO: ${e}`)
     }
   }
 
   static async addReview(restaurantId, user, review, date) {
+      console.log(restaurantId, text);
     try {
-      const reviewDoc = { name: user.name,
+     const reviewDoc = { 
+          name: user.name,
           user_id: user._id,
           date: date,
           text: review,
           restaurant_id: ObjectId(restaurantId), }
+
 
       return await reviews.insertOne(reviewDoc)
     } catch (e) {
