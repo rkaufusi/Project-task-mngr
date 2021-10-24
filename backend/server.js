@@ -1,13 +1,14 @@
-import express from 'express'
-import cors from 'cors'
-import tasklist from './api/tasklist.route.js'
 
-const app = express()
+const express = require("express");
+const dotenv = require('dotenv');
+// old syntax ^
 
-app.use(cors())
-app.use(express.json())
+const app = express();
+dotenv.config({path:'.env'})
+const port = process.env.PORT || 8080
 
-app.use("/api/v1/tasklist", tasklist)
-app.use("*", (req, res) => res.status(404).json({error: "not found"}));
+app.get('/', (req, res) => {
+  res.send('task kanban')
+})
 
-export default app
+app.listen(port, () => {console.log(`Server running on http://localhost:${port}`)});
