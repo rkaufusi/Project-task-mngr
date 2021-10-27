@@ -1,7 +1,8 @@
+
 // ES6 import syntax
 import express from 'express';
 // express 4.16+ doesnt need bodyparser
-//import bodyParser from 'body-parser';
+// import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import taskRoutes from './routes/tasks.js'
@@ -9,20 +10,22 @@ import taskRoutes from './routes/tasks.js'
 
 const app = express();
 
-// express middlewear, every task from taskRoutes starts with /tasks
-//localhost:5000/tasks
+// express middlewear, every task from taskRoutes starts with /tasks | localhost:5000/tasks
 app.use('/tasks', taskRoutes)
-// old syntax app.use(bodyParser.json())
+
+// old syntax app.use(bodyParser.json()) new is express.json
 app.use(express.json({limit: "30mb", extended: true}));
 app.use(express.urlencoded({limit: "30mb", extended: true}));
 app.use(cors());
+
 // using this for now instead of dotenv
-const CONNECTION_URL = 'mongodb+srv://TaskMNGR:changedpass@cluster0.pjhrt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+const CONNECTION_URL = 'mongodb+srv://TaskMNGR:Shoexx2978@cluster0.pjhrt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 const PORT = process.env.PORT || 5000
+
 // mongoose.connect(url, {object of certain things, not required})
 mongoose.connect(CONNECTION_URL,  {useNewUrlParser: true, useUnifiedTopology: true})
-.then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
-.catch((error) => console.log(error.message));
+  .then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
+  .catch((error) => console.log(error.message));
 
 // once connect to the db can start creating routes for backend new folder "routes"
 

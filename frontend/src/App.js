@@ -1,9 +1,14 @@
 import React from 'react'
+import Unassigned from './components/Unassigned.js'
+import Todo from './components/Todo'
+import Done from './components/Done'
 
 const App = () => {
     return (
         <div>
-            <h1>app</h1>
+            <Unassigned/>
+            <Todo/>
+            <Done/>
         </div>
     )
 }
