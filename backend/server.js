@@ -19,7 +19,7 @@ app.use(express.urlencoded({limit: "30mb", extended: true}));
 app.use(cors());
 
 // using this for now instead of dotenv
-const CONNECTION_URL = 'mongodb+srv://TaskMNGR:redacted@cluster0.pjhrt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+const CONNECTION_URL = 'mongodb+srv://TaskMNGR:@cluster0.pjhrt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 const PORT = process.env.PORT || 5000
 
 // mongoose.connect(url, {object of certain things, not required})
